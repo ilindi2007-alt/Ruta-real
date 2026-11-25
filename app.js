@@ -60,12 +60,28 @@
     (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
 
   let baseLayer = null, mapDark = false;
-  const TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
+  // Proveedores de mapa gratuitos y sin clave; si uno falla se pasa al siguiente.
+  const TILE_PROVIDERS = [
+    { url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png", opts: { maxZoom: 19 } },
+    { url: "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png", opts: { maxZoom: 19, subdomains: "abc" } },
+    { url: "https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png", opts: { maxZoom: 18, subdomains: "abc" } }
+  ];
+  let providerIdx = 0;
+  function loadBase() {
+    if (baseLayer) map.removeLayer(baseLayer);
+    const pr = TILE_PROVIDERS[providerIdx];
+    let errors = 0, loaded = 0;
+    baseLayer = L.tileLayer(pr.url, Object.assign({ attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }, pr.opts));
+    baseLayer.on("tileload", () => { loaded++; });
+    baseLayer.on("tileerror", () => {
+      errors++;
+      if (errors >= 4 && loaded === 0 && providerIdx < TILE_PROVIDERS.length - 1) { providerIdx++; loadBase(); }
+    });
+    baseLayer.addTo(map).bringToBack();
+  }
   function setMapStyle(darkStyle) {
     mapDark = darkStyle;
-    if (baseLayer) map.removeLayer(baseLayer);
-    baseLayer = L.tileLayer(`https://{s}.basemaps.cartocdn.com/${darkStyle ? "dark_all" : "rastertiles/voyager"}/{z}/{x}/{y}{r}.png`, { maxZoom: 19, subdomains: "abcd", attribution: TILE_ATTR }).addTo(map);
-    baseLayer.bringToBack();
+    if (!baseLayer) loadBase();
     document.querySelector(".map-wrap").classList.toggle("map-dark", darkStyle);
     const b = $("#styleBtn");
     b.setAttribute("aria-label", darkStyle ? "Cambiar a mapa claro" : "Cambiar a mapa oscuro");
