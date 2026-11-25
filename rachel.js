@@ -166,6 +166,7 @@
   }
 
   form.addEventListener("submit", (e) => { e.preventDefault(); send(input.value); });
+  window.Rachel = { send };
   ["Llévame a la Plaza de España", "¿Es accesible el metro?", "Cuéntame un dato curioso", "¿Qué incluye Premium?"].forEach((q) => {
     const b = document.createElement("button"); b.type = "button"; b.textContent = q;
     b.addEventListener("click", () => send(q));

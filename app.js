@@ -59,20 +59,84 @@
   const dark = () => document.documentElement.dataset.theme === "dark" ||
     (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
 
+  let baseLayer = null, mapDark = false;
+  const TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
+  function setMapStyle(darkStyle) {
+    mapDark = darkStyle;
+    if (baseLayer) map.removeLayer(baseLayer);
+    baseLayer = L.tileLayer(`https://{s}.basemaps.cartocdn.com/${darkStyle ? "dark_all" : "rastertiles/voyager"}/{z}/{x}/{y}{r}.png`, { maxZoom: 19, subdomains: "abcd", attribution: TILE_ATTR }).addTo(map);
+    baseLayer.bringToBack();
+    document.querySelector(".map-wrap").classList.toggle("map-dark", darkStyle);
+    const b = $("#styleBtn");
+    b.setAttribute("aria-label", darkStyle ? "Cambiar a mapa claro" : "Cambiar a mapa oscuro");
+    b.innerHTML = darkStyle
+      ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
+      : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+    store.set("rr_mapdark", darkStyle);
+  }
+
+  const POI_STYLE = {
+    catedral: ["⛪", "#8a5a2b"], alcazar: ["🏰", "#8a5a2b"], "plaza-espana": ["🏛️", "#8a5a2b"], setas: ["🍄", "#8a5a2b"],
+    "torre-oro": ["🏯", "#8a5a2b"], triana: ["🌉", "#2b6cb0"], "maria-luisa": ["🌳", "#2f8f4e"], archivo: ["📜", "#8a5a2b"],
+    "santa-cruz": ["🏘️", "#8a5a2b"], "plaza-nueva": ["🏛️", "#6b4fa0"], "santa-justa": ["🚆", "#1f46c0"], prado: ["🚌", "#1f46c0"],
+    "virgen-rocio": ["🏥", "#c0392b"], alamillo: ["🌳", "#2f8f4e"]
+  };
+  function addPois() {
+    const g = L.layerGroup().addTo(map);
+    PLACES.forEach((p) => {
+      const [ico, col] = POI_STYLE[p.id] || ["📍", "#1f46c0"];
+      const icon = L.divIcon({ className: "", html: `<div class="poi"><i style="background:${col}">${ico}</i><span>${esc(p.name)}</span></div>`, iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -12] });
+      L.marker([p.lat, p.lon], { icon, title: p.name, keyboard: true }).bindPopup(
+        `<div class="poi-pop"><strong>${esc(p.name)}</strong><div class="row">
+          <button type="button" class="chip" data-go="${p.lat},${p.lon}" data-name="${esc(p.name)}">Ir aquí</button>
+          <button type="button" class="chip" data-ask="${esc(p.name)}">Preguntar a Rachel</button></div></div>`).addTo(g);
+    });
+    const upd = () => document.querySelector(".map-wrap").classList.toggle("labels-off", map.getZoom() < 14);
+    map.on("zoomend", upd); upd();
+  }
+
+  let watchId = null, meMarker = null, meCircle = null, firstFix = true;
+  function toggleFollow() {
+    const btn = $("#followBtn");
+    if (watchId !== null) {
+      navigator.geolocation.clearWatch(watchId); watchId = null; btn.setAttribute("aria-pressed", "false");
+      if (meMarker) { map.removeLayer(meMarker); map.removeLayer(meCircle); meMarker = meCircle = null; }
+      return;
+    }
+    if (!navigator.geolocation) { status("Tu navegador no permite obtener la ubicación."); return; }
+    btn.setAttribute("aria-pressed", "true"); firstFix = true; status("Buscando tu ubicación…");
+    watchId = navigator.geolocation.watchPosition((pos) => {
+      const ll = [pos.coords.latitude, pos.coords.longitude];
+      if (!meMarker) {
+        meMarker = L.marker(ll, { icon: L.divIcon({ className: "", html: '<div class="me-dot"><i></i></div>', iconSize: [22, 22], iconAnchor: [11, 11] }), zIndexOffset: 1000 }).bindPopup("Estás aquí").addTo(map);
+        meCircle = L.circle(ll, { radius: pos.coords.accuracy, color: "#2f7bff", weight: 1, fillOpacity: .12 }).addTo(map);
+      } else { meMarker.setLatLng(ll); meCircle.setLatLng(ll).setRadius(pos.coords.accuracy); }
+      if (firstFix) { map.setView(ll, 16); firstFix = false; status(""); }
+      sel.from = { name: "Mi ubicación", lat: ll[0], lon: ll[1] };
+      if (!$("#from").value || $("#from").value === "Mi ubicación") $("#from").value = "Mi ubicación";
+    }, () => {
+      status("No hemos podido acceder a tu ubicación. Revisa el permiso de ubicación del navegador.");
+      navigator.geolocation.clearWatch(watchId); watchId = null; btn.setAttribute("aria-pressed", "false");
+    }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 15000 });
+  }
+
   function initMap() {
     if (!window.L) { status("No se pudo cargar el mapa. Revisa tu conexión."); return; }
-    map = L.map("map", { zoomControl: true, scrollWheelZoom: false }).setView(SEVILLA, 14);
-    const tiles = dark() ? "dark_all" : "rastertiles/voyager";
-    L.tileLayer(`https://{s}.basemaps.cartocdn.com/${tiles}/{z}/{x}/{y}{r}.png`, {
-      maxZoom: 19, subdomains: "abcd",
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-    }).addTo(map);
+    map = L.map("map", { zoomControl: true, scrollWheelZoom: false, tap: true }).setView(SEVILLA, 14);
+    const savedDark = store.get("rr_mapdark", null);
+    setMapStyle(savedDark === null ? dark() : savedDark);
     map.on("focus", () => map.scrollWheelZoom.enable());
     map.on("blur", () => map.scrollWheelZoom.disable());
+    map.getContainer().addEventListener("mouseenter", () => map.scrollWheelZoom.enable());
+    map.getContainer().addEventListener("mouseleave", () => map.scrollWheelZoom.disable());
+    addPois();
     markers = L.layerGroup().addTo(map);
     layers.reports = L.layerGroup().addTo(map);
     renderReports();
     map.on("click", onMapClick);
+    $("#styleBtn").addEventListener("click", () => setMapStyle(!mapDark));
+    $("#followBtn").addEventListener("click", toggleFollow);
+    if (window.ResizeObserver) new ResizeObserver(() => map.invalidateSize()).observe(document.getElementById("map"));
   }
 
   const pinIcon = (label, color) => L.divIcon({ className: "", html: `<div class="pin" style="background:${color}"><b>${label}</b></div>`, iconSize: [30, 30], iconAnchor: [15, 30], popupAnchor: [0, -28] });
@@ -372,6 +436,12 @@
       map.closePopup(); planFromForm();
     });
   }
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-ask]");
+    if (!b) return;
+    map.closePopup(); openRachel();
+    if (window.Rachel) window.Rachel.send("Háblame de " + b.dataset.ask);
+  });
   const KIND = { restaurant: "Restaurante", cafe: "Cafetería", bar: "Bar", museum: "Museo", hotel: "Hotel", pharmacy: "Farmacia", bank: "Banco", supermarket: "Supermercado", attraction: "Atracción turística", place_of_worship: "Templo", theatre: "Teatro", cinema: "Cine", library: "Biblioteca", hospital: "Hospital", clinic: "Centro de salud", fast_food: "Comida rápida", ice_cream: "Heladería", parking: "Aparcamiento", park: "Parque", clothes: "Tienda de ropa" };
 
   /* ---------------- Reportar obstáculos ---------------- */

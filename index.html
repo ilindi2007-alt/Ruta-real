@@ -109,7 +109,7 @@
       <div class="section-head">
         <p class="eyebrow">Mapa interactivo</p>
         <h2>¿A dónde quieres ir en Sevilla?</h2>
-        <p class="lead">Busca cualquier lugar de la ciudad, elige cómo te mueves y te trazamos la ruta evitando escaleras cuando lo necesites. También puedes ver estaciones de metro, aseos adaptados y reportar obstáculos.</p>
+        <p class="lead">Mueve el mapa, acerca con los dedos y toca cualquier lugar. Busca cualquier sitio de la ciudad, elige cómo te mueves y te trazamos la ruta evitando escaleras cuando lo necesites. También puedes ver estaciones de metro, aseos adaptados y reportar obstáculos.</p>
       </div>
 
       <div class="map-shell">
@@ -168,6 +168,14 @@
             <button type="button" id="layerWc" aria-pressed="false">🚻 Aseos adaptados</button>
             <button type="button" id="layerPlaces" aria-pressed="false">♿ Lugares accesibles</button>
             <button type="button" id="reportBtn" aria-pressed="false">⚠️ Reportar obstáculo</button>
+          </div>
+          <div class="map-fab">
+            <button type="button" id="styleBtn" aria-label="Cambiar a mapa oscuro" title="Mapa claro / oscuro">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            </button>
+            <button type="button" id="followBtn" aria-pressed="false" aria-label="Mostrar mi ubicación" title="Mi ubicación">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M3 11 21 3l-8 18-2-8-8-2z"/></svg>
+            </button>
           </div>
           <div class="map-status" id="mapStatus" role="status"></div>
         </div>
