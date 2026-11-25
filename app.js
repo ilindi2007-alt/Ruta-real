@@ -19,7 +19,7 @@
   $$("#nav a").forEach((a) => a.addEventListener("click", () => { nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); }));
 
   /* ---------------- Lugares ---------------- */
-  const SEVILLA = [37.3891, -5.9845];
+  const SEVILLA = [37.389, -5.995]; // 37° 23' N, 5° 59' O
   const VIEWBOX = "-6.12,37.47,-5.82,37.30"; // área metropolitana cercana
   const PLACES = [
     { id: "catedral", name: "Catedral y Giralda", lat: 37.3858, lon: -5.9931 },
@@ -451,8 +451,9 @@
   function openPay(routeName) {
     lastFocus = document.activeElement;
     $("#payNote").textContent = (routeName ? `«${routeName}» es una ruta Premium. ` : "") +
-      (CFG.PAYMENT_URL ? "Te llevaremos a la pasarela de pago segura para completar la suscripción." : "Los pagos online se activarán muy pronto. Mientras tanto, puedes probar Premium gratis en este dispositivo.");
-    $("#payGo").textContent = CFG.PAYMENT_URL ? "Ir al pago (4,99 €)" : "Probar Premium gratis";
+      "Prototipo: el pago es simulado y no se realiza ningún cargo real.";
+    $("#payGo").textContent = "Pagar 4,99 €";
+    $("#payGo").disabled = false;
     modal.hidden = false; $("#payGo").focus();
   }
   function closePay() { modal.hidden = true; if (lastFocus) lastFocus.focus(); }
@@ -466,9 +467,14 @@
     modal.addEventListener("click", (e) => { if (e.target === modal) closePay(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closePay(); });
     $("#payGo").addEventListener("click", () => {
-      if (CFG.PAYMENT_URL) { window.open(CFG.PAYMENT_URL, "_blank", "noopener"); closePay(); return; }
-      store.set("rr_premium", true); renderPremium(); closePay();
-      $("#premiumState").textContent = "¡Bienvenido a Premium! Las rutas exclusivas ya están desbloqueadas en el mapa.";
+      const method = { paypal: "PayPal", card: "tarjeta", bizum: "Bizum", transfer: "transferencia" }[($('input[name="pay"]:checked') || {}).value] || "PayPal";
+      const go = $("#payGo");
+      go.disabled = true; go.textContent = "Procesando pago…";
+      $("#payNote").textContent = `Conectando con ${method} (simulación)…`;
+      setTimeout(() => {
+        store.set("rr_premium", true); renderPremium(); closePay();
+        $("#premiumState").textContent = `¡Pago de 4,99 € con ${method} completado (simulado)! Premium está activo y las rutas exclusivas ya están desbloqueadas en el mapa.`;
+      }, 1600);
     });
   }
 
@@ -495,8 +501,15 @@
       let sent = false;
       if (CFG.FEEDBACK_ENDPOINT) {
         try {
-          const r = await fetch(CFG.FEEDBACK_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data) });
-          sent = r.ok;
+          const payload = {
+            _subject: `Ruta Real · Nueva ${data.kind}`, _template: "table", _captcha: "false",
+            Tipo: data.kind, Nombre: data.name || "(sin nombre)", Email: data.email || "(sin email)",
+            Lugar: data.place || "(sin indicar)", Mensaje: data.msg, Fecha: new Date(data.date).toLocaleString("es-ES")
+          };
+          if (data.email) payload._replyto = data.email;
+          const r = await fetch(CFG.FEEDBACK_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload) });
+          const j = await r.json().catch(() => ({}));
+          sent = r.ok && String(j.success) === "true";
         } catch (err) {}
       }
       const list = store.get("rr_feedback", []); list.push(data); store.set("rr_feedback", list);

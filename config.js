@@ -1,13 +1,10 @@
 // Configuración de Ruta Real. Rellena estos valores cuando los tengáis.
 window.RUTA_REAL_CONFIG = {
-  // Enlace de pago de Premium (4,99 €). Por ejemplo un enlace de PayPal.me o de Stripe Payment Links.
-  // Si está vacío, el botón activa una prueba gratuita de demostración en este navegador.
-  PAYMENT_URL: "",
+  // Prototipo: el pago de Premium (4,99 €) es simulado y no hace ningún cargo.
 
-  // Dónde se envían las quejas y sugerencias. Acepta un endpoint de Formspree
-  // (https://formspree.io/f/XXXX) o cualquier URL que reciba un POST con JSON.
+  // Las quejas y sugerencias se envían por email con FormSubmit (formsubmit.co).
   // Si está vacío, los mensajes se guardan en el navegador y se ofrece enviarlos por Instagram.
-  FEEDBACK_ENDPOINT: "",
+  FEEDBACK_ENDPOINT: "https://formsubmit.co/ajax/dansanmed@alum.us.es",
 
   // Servidor propio para que Rachel use un modelo de IA (POST {messages} -> {reply}).
   // Si está vacío, Rachel responde con su base de conocimiento integrada.
