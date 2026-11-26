@@ -1,0 +1,145 @@
+/* Ruta Real Web — versión vibrante. Se carga encima de ../styles.css y reutiliza su estructura.
+   Paleta de Sevilla: azul azulejo, amarillo albero, rojo clavel y turquesa del Guadalquivir. */
+:root {
+  --blue: #1e4dff;
+  --blue-deep: #0b1f8f;
+  --blue-soft: #e3e9ff;
+  --red: #ff2d55;
+  --red-soft: #ffe4ea;
+  --albero: #ffc21a;
+  --turq: #00c2b2;
+  --turq-soft: #d9faf6;
+  --teal: #b5dadf;
+  --bg: #f6f8ff;
+  --surface: #ffffff;
+  --ink: #0e1233;
+  --ink-2: #444c78;
+  --line: #d6dcf5;
+  --ok: #0f9d58;
+  --warn: #c76a00;
+  --on-blue: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --blue: #5b7cff; --blue-deep: #0a1460; --blue-soft: #1a2252;
+    --red: #ff4d6d; --red-soft: #3d1424; --albero: #ffcc33; --turq: #1fd6c6; --turq-soft: #0f3532;
+    --bg: #0a0d24; --surface: #13183a; --ink: #f1f3ff; --ink-2: #b0b8e0; --line: #2a3270;
+    --ok: #3ee08f; --warn: #ffb547; --on-blue: #ffffff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --blue: #5b7cff; --blue-deep: #0a1460; --blue-soft: #1a2252;
+  --red: #ff4d6d; --red-soft: #3d1424; --albero: #ffcc33; --turq: #1fd6c6; --turq-soft: #0f3532;
+  --bg: #0a0d24; --surface: #13183a; --ink: #f1f3ff; --ink-2: #b0b8e0; --line: #2a3270;
+  --ok: #3ee08f; --warn: #ffb547; --on-blue: #ffffff;
+  color-scheme: dark;
+}
+
+.vivid h1, .vivid h2 { font-weight: 800; }
+.vivid .eyebrow { color: var(--red); }
+
+/* Botones */
+.vivid .btn { background: var(--blue); color: var(--on-blue) !important; box-shadow: 0 6px 0 var(--blue-deep); transition: transform .12s, box-shadow .12s; }
+.vivid .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--blue-deep); filter: none; }
+.vivid .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--blue-deep); }
+.vivid .btn.red { background: var(--red); box-shadow: 0 6px 0 #a3002a; }
+.vivid .btn.ghost { background: transparent; color: var(--blue) !important; box-shadow: inset 0 0 0 2px var(--blue); }
+
+/* Cabecera */
+.vivid .site-header { background: color-mix(in srgb, var(--surface) 90%, transparent); border-bottom: 3px solid var(--albero); }
+.vivid .brand span b { color: var(--red); }
+.vivid .nav .ig { background: linear-gradient(45deg, #f9a825, #ff2d55 55%, #c13584); }
+
+/* Hero: azulejo sevillano */
+.vivid .hero {
+  color: #fff;
+  background-color: var(--blue);
+  background-image:
+    repeating-linear-gradient(45deg, rgb(255 255 255 / .06) 0 2px, transparent 2px 36px),
+    repeating-linear-gradient(-45deg, rgb(255 255 255 / .06) 0 2px, transparent 2px 36px),
+    radial-gradient(900px 500px at 85% 20%, rgb(255 194 26 / .28), transparent 60%),
+    radial-gradient(700px 500px at 0% 100%, rgb(255 45 85 / .35), transparent 60%),
+    linear-gradient(135deg, #1e4dff 0%, #1236d6 60%, #0b1f8f 100%);
+  padding-block: clamp(48px, 7vw, 96px);
+}
+.vivid .hero .eyebrow { color: var(--albero); }
+.vivid .hero h1 { color: #fff; font-size: clamp(2.4rem, 4.8vw, 3.8rem); }
+.vivid .hero h1 em { color: var(--albero); }
+.vivid .hero .lead { color: rgb(255 255 255 / .9); }
+.vivid .hero .btn { background: var(--albero); color: #1b1300 !important; box-shadow: 0 6px 0 #b38200; }
+.vivid .hero .btn.ghost { background: transparent; color: #fff !important; box-shadow: inset 0 0 0 2px #fff; }
+.vivid .rachel-arch { box-shadow: 0 0 0 8px var(--albero), 0 0 0 16px var(--red), 0 24px 50px rgb(0 0 0 / .35); }
+.vivid .rachel-tag { color: var(--ink); border: 0; box-shadow: 0 12px 30px rgb(0 0 0 / .3); }
+
+/* Cinta animada */
+.ticker { background: var(--albero); color: #1b1300; overflow: hidden; border-block: 3px solid var(--ink); }
+.ticker-track { display: flex; gap: 0; width: max-content; animation: ticker 32s linear infinite; }
+.ticker span { font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .06em; padding: 12px 22px; white-space: nowrap; }
+.ticker span::after { content: "★"; margin-left: 44px; color: var(--red); }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* Quiénes somos */
+.vivid .promise { background: var(--red); color: #fff; border-left: 0; border-radius: 18px; box-shadow: 8px 8px 0 var(--albero); }
+.vivid .var { border: 0; border-top: 6px solid var(--blue); box-shadow: 0 8px 24px rgb(30 77 255 / .1); }
+.vivid .var:nth-child(2) { border-top-color: var(--red); }
+.vivid .var:nth-child(3) { border-top-color: var(--albero); }
+.vivid .var:nth-child(4) { border-top-color: var(--turq); }
+.vivid .var:nth-child(5) { border-top-color: var(--red); }
+.vivid .var:nth-child(6) { border-top-color: var(--blue); }
+.vivid .stats { background: var(--blue-deep); border-radius: 24px; padding: 24px; gap: 20px; }
+.vivid .stat { border-top: 0; border-left: 4px solid var(--albero); padding: 6px 0 6px 16px; }
+.vivid .stat strong { color: var(--albero); font-size: 2.6rem; }
+.vivid .stat span { color: #dfe5ff; }
+.vivid .team span { background: var(--turq-soft); border-color: transparent; font-weight: 700; }
+
+/* Mapa */
+.vivid .map-section { background: linear-gradient(180deg, var(--turq-soft), var(--bg)); border-block: 0; }
+.vivid .map-shell { border: 4px solid var(--blue); box-shadow: 10px 10px 0 var(--albero); }
+.vivid .profiles input:checked + label { background: var(--blue); color: #fff; border-color: var(--blue); }
+.vivid .chip { background: var(--surface); border: 2px solid var(--line); font-weight: 700; }
+.vivid .chip:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+.vivid .chip.premium { background: var(--albero); border-color: var(--albero); color: #1b1300; }
+.vivid .chip.premium::before { color: var(--red); }
+.vivid .map-tools button[aria-pressed="true"], .vivid .map-fab button[aria-pressed="true"] { background: var(--red); border-color: var(--red); }
+.vivid .result-top div strong { color: var(--red); }
+
+/* Premium */
+.vivid #premium { background: var(--blue-deep); color: #fff; }
+.vivid #premium .eyebrow { color: var(--albero); }
+.vivid #premium h2, .vivid #premium h3 { color: #fff; }
+.vivid #premium .lead { color: #dfe5ff; }
+.vivid .plan { background: linear-gradient(140deg, #ff2d55, #ff7a1a); box-shadow: 10px 10px 0 var(--albero); }
+.vivid .plan::after { border-color: rgb(255 255 255 / .25); }
+.vivid .plan li::before { color: #fff; }
+.vivid .plan .btn { background: #fff; color: #d4002f !important; box-shadow: 0 6px 0 rgb(0 0 0 / .25); }
+.vivid .compare { border: 0; color: var(--ink); }
+.vivid .compare th { background: var(--albero); color: #1b1300; }
+.vivid .social { background: linear-gradient(45deg, #f9a825, #ff2d55 55%, #c13584); border: 0; color: #fff; }
+.vivid .social h3, .vivid .social .muted, .vivid .social strong { color: #fff; }
+.vivid .social .ig-icon { background: #fff; color: #ff2d55; }
+.vivid .social .btn { background: #fff; color: #d4002f !important; box-shadow: 0 6px 0 rgb(0 0 0 / .2); }
+
+/* Quejas */
+.vivid #quejas { background: var(--red-soft); }
+.vivid .form { border: 0; box-shadow: 10px 10px 0 var(--red); }
+.vivid .seg input:checked + label { background: var(--red); color: #fff; border-color: var(--red); }
+
+/* Pie */
+.vivid footer { background: var(--ink); color: #c9cff0; border-top: 6px solid var(--albero); }
+.vivid footer a { color: var(--albero); }
+.vivid footer strong { color: #fff; }
+
+/* Rachel */
+.vivid .rachel-head { background: linear-gradient(120deg, var(--red), #ff7a1a); color: #fff; }
+.vivid .rachel-head p { color: rgb(255 255 255 / .9); }
+.vivid .rachel-head p::before { background: #7dffb3; }
+.vivid .rachel-head .close { color: #fff; }
+.vivid .rachel-head .close:hover { background: rgb(255 255 255 / .2); }
+.vivid .msg.me { background: var(--blue); color: #fff !important; }
+.vivid .msg.bot { background: var(--turq-soft); border-color: transparent; }
+.vivid .composer button { background: var(--blue); }
+.vivid .quick button:hover { background: var(--red); color: #fff; border-color: var(--red); }
+.vivid .rachel-fab { background: linear-gradient(120deg, var(--red), #ff7a1a); }
+
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }

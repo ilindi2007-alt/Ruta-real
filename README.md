@@ -8,6 +8,11 @@ Web pública de Ruta Real: rutas accesibles por Sevilla para personas con movili
 - **Quejas y sugerencias**.
 - **Rachel**, en el lateral, para preguntar cualquier cosa.
 
+Hay dos versiones con las mismas funciones:
+
+- **App**: la página principal (`/`).
+- **Web**: versión con colores más vivos (`/web/`).
+
 Es una web estática (HTML, CSS y JS) publicada con GitHub Pages. La configuración (enlace de pago, destino de las quejas, servidor de IA) está en `config.js`.
 
 Datos del mapa: © colaboradores de OpenStreetMap. Rutas: Valhalla (FOSSGIS). Búsqueda: Nominatim.

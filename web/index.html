@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ruta Real Web</title>
+<meta name="description" content="Ruta Real: rutas accesibles por Sevilla para personas con movilidad reducida, con Rachel, nuestra asistente de IA.">
+<meta property="og:title" content="Ruta Real · Rutas accesibles en Sevilla">
+<meta property="og:description" content="Cero sorpresas. Sal a la calle con la certeza de que podrás llegar, entrar y disfrutar.">
+<meta property="og:image" content="../assets/logo.png">
+<meta name="theme-color" content="#1e4dff">
+<link rel="icon" href="../assets/logo.png">
+<link rel="apple-touch-icon" href="../assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Outfit:wght@500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="vivid.css">
+</head>
+<body class="vivid">
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" aria-label="Ruta Real, inicio">
+      <img src="../assets/logo.png" alt="" width="38" height="38">
+      <span>Ruta <b>Real</b></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menú</button>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#quienes-somos">Quiénes somos</a>
+      <a href="#mapa">Mapa</a>
+      <a href="#premium">Premium</a>
+      <a href="#quejas">Quejas y sugerencias</a>
+      <a href="../">Versión app</a>
+      <a class="ig" href="https://www.instagram.com/somosrutareal?dmpr=MWZ5NWp1ZWpvdjFoaw==" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+<main id="contenido">
+
+  <!-- ============ QUIÉNES SOMOS ============ -->
+  <section class="hero" id="inicio">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Rutas accesibles · Sevilla</p>
+        <h1>Sal a la calle sabiendo que <em>podrás llegar, entrar y disfrutar.</em></h1>
+        <p class="lead">Ruta Real es un asistente de autonomía para personas con movilidad reducida. Te decimos por dónde ir según tu silla, tus muletas o tu forma de moverte, y no solo si un sitio es “accesible” o “no accesible”.</p>
+        <div class="cta-row">
+          <a class="btn" href="#mapa">Buscar una ruta</a>
+          <button class="btn ghost" type="button" data-open-rachel>Hablar con Rachel</button>
+        </div>
+      </div>
+      <figure class="rachel-figure" aria-label="Rachel, la asistente de Ruta Real">
+        <div class="rachel-arch"><img src="../assets/rachel.png" alt="Ilustración de Rachel: chica con el pelo largo y rizado, blazer rojo, camiseta blanca y vaqueros" width="330" height="540"></div>
+        <figcaption class="rachel-tag"><b>Rachel</b><br>Tu asistente de IA. Pregúntale rutas, historia de Sevilla o dudas de la app.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true"><div class="ticker-track">
+    <span>Sevilla sin barreras</span><span>Rutas para silla manual y eléctrica</span><span>Cero sorpresas</span><span>Pregúntale a Rachel</span><span>Premium 4,99 €</span><span>@somosrutareal</span>
+    <span>Sevilla sin barreras</span><span>Rutas para silla manual y eléctrica</span><span>Cero sorpresas</span><span>Pregúntale a Rachel</span><span>Premium 4,99 €</span><span>@somosrutareal</span>
+  </div></div>
+
+  <section id="quienes-somos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Quiénes somos</p>
+        <h2>Un mapa que entiende los matices</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>Somos el <strong>Grupo 3 Innovadores</strong> y creamos Ruta Real para resolver un problema social real. Cuando una persona con movilidad reducida busca cómo ir de un sitio a otro, ninguna plataforma responde a sus necesidades completas. ¿Qué pasa si hay escaleras? ¿Aguanta su silla esa cuesta? ¿Hay agujeros en el suelo?</p>
+          <p>Google Maps o Apple Maps tratan la accesibilidad como un sí o un no. La realidad tiene matices: un escalón de 3 centímetros puede superarse con una silla eléctrica y ser un muro para una silla manual. Una calle plana de adoquín suelto puede ser dolorosa e intransitable.</p>
+        </div>
+        <div>
+          <p><strong>Lo que queremos aportar:</strong> quitar la carga mental y la ansiedad de salir de casa. Rutas actualizadas, adaptadas a tu perfil y con transportes que otras apps no registran. Y que la experiencia no termine al llegar: Rachel te cuenta la historia del lugar, datos curiosos y la actualidad de tu entorno.</p>
+          <p class="promise">“Cero sorpresas. Sal a la calle con la certeza absoluta de que podrás llegar, entrar y disfrutar.”</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:48px">Las seis cosas que medimos y otros descuidan</h3>
+      <div class="vars">
+        <article class="var"><h3>Micro‑infraestructura</h3><p>Escalones, rampas, ancho de puertas y tipo de pavimento de cada tramo.</p></article>
+        <article class="var"><h3>Tiempo real</h3><p>Avisos de ascensores averiados, obras o cortes reportados por usuarios.</p></article>
+        <article class="var"><h3>Tu perfil</h3><p>Silla manual o eléctrica, muletas, tolerancia a pendientes, escalones a evitar.</p></article>
+        <article class="var"><h3>Comunidad</h3><p>Los usuarios validan y reportan el estado real de las calles.</p></article>
+        <article class="var"><h3>Última milla</h3><p>Guiado a nivel de acera que evita aceras estrechas y pasos sin rebajar.</p></article>
+        <article class="var"><h3>Ayuda directa</h3><p>Fotos de los puntos críticos y botón de solicitud de ayuda en ruta.</p></article>
+      </div>
+
+      <h3 style="margin-top:56px">Lo que nos dijo nuestra encuesta</h3>
+      <div class="stats">
+        <div class="stat"><strong>96,4%</strong><span>se ha encontrado barreras de accesibilidad alguna vez</span></div>
+        <div class="stat"><strong>90,9%</strong><span>usaría una app que indique qué lugares son accesibles</span></div>
+        <div class="stat"><strong>95,5%</strong><span>quiere recomendaciones de ocio y gastronomía adaptadas</span></div>
+        <div class="stat"><strong>58,6%</strong><span>prioriza buena señalización e información sobre la ruta</span></div>
+      </div>
+      <p class="source">Encuesta propia de Ruta Real, 111 respuestas.</p>
+
+      <div class="team" aria-label="Equipo">
+        <b>El equipo</b>
+        <span>Israel Monje Rodríguez</span><span>Raquel Lorence Gutiérrez</span><span>Manuel García García</span>
+        <span>Marta Tudela Desamparados</span><span>Daniel Sánchez Medina</span><span>Adrián Serrano Mora</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAPA ============ -->
+  <section class="map-section" id="mapa">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Mapa interactivo</p>
+        <h2>¿A dónde quieres ir en Sevilla?</h2>
+        <p class="lead">Mueve el mapa, acerca con los dedos y toca cualquier lugar. Busca cualquier sitio de la ciudad, elige cómo te mueves y te trazamos la ruta evitando escaleras cuando lo necesites. También puedes ver estaciones de metro, aseos adaptados y reportar obstáculos.</p>
+      </div>
+
+      <div class="map-shell">
+        <form class="planner" id="planner" autocomplete="off">
+          <div class="field">
+            <label for="from">Desde</label>
+            <div class="input-row">
+              <input type="text" id="from" placeholder="Tu ubicación o una dirección" aria-autocomplete="list">
+              <button type="button" class="icon-btn" id="locateBtn" title="Usar mi ubicación" aria-label="Usar mi ubicación">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+              </button>
+            </div>
+            <div class="suggest" id="fromSuggest" hidden></div>
+          </div>
+          <div class="field">
+            <label for="to">Hasta</label>
+            <div class="input-row">
+              <input type="text" id="to" placeholder="Ej. Plaza de España" aria-autocomplete="list">
+              <button type="button" class="icon-btn" id="swapBtn" title="Intercambiar" aria-label="Intercambiar origen y destino">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4v16M7 4 3 8M7 4l4 4M17 20V4M17 20l-4-4M17 20l4-4"/></svg>
+              </button>
+            </div>
+            <div class="suggest" id="toSuggest" hidden></div>
+          </div>
+
+          <div class="field">
+            <span class="lbl" id="profLbl">¿Cómo te mueves?</span>
+            <div class="profiles" role="radiogroup" aria-labelledby="profLbl">
+              <input type="radio" name="profile" id="p-manual" value="manual" checked><label for="p-manual">♿ Silla manual</label>
+              <input type="radio" name="profile" id="p-electric" value="electric"><label for="p-electric">⚡ Silla eléctrica</label>
+              <input type="radio" name="profile" id="p-crutches" value="crutches"><label for="p-crutches">🦯 Muletas / andador</label>
+              <input type="radio" name="profile" id="p-visual" value="visual"><label for="p-visual">👁 Baja visión</label>
+              <input type="radio" name="profile" id="p-walk" value="walk"><label for="p-walk">🚶 A pie, sin prisa</label>
+              <input type="radio" name="profile" id="p-stroller" value="stroller"><label for="p-stroller">👶 Carrito de bebé</label>
+            </div>
+          </div>
+
+          <button class="btn" type="submit" id="routeBtn">Calcular ruta accesible</button>
+
+          <div class="field">
+            <span class="lbl">Destinos rápidos</span>
+            <div class="chips" id="quickPlaces"></div>
+          </div>
+          <div class="field">
+            <span class="lbl">Rutas Premium</span>
+            <div class="chips" id="premiumRoutes"></div>
+          </div>
+
+          <div id="result" aria-live="polite"></div>
+        </form>
+
+        <div class="map-wrap">
+          <div id="map" role="application" aria-label="Mapa de Sevilla"></div>
+          <div class="map-tools">
+            <button type="button" id="layerMetro" aria-pressed="false">🚇 Metro y tranvía</button>
+            <button type="button" id="layerWc" aria-pressed="false">🚻 Aseos adaptados</button>
+            <button type="button" id="layerPlaces" aria-pressed="false">♿ Lugares accesibles</button>
+            <button type="button" id="reportBtn" aria-pressed="false">⚠️ Reportar obstáculo</button>
+          </div>
+          <div class="map-fab">
+            <button type="button" id="styleBtn" aria-label="Cambiar a mapa oscuro" title="Mapa claro / oscuro">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            </button>
+            <button type="button" id="followBtn" aria-pressed="false" aria-label="Mostrar mi ubicación" title="Mi ubicación">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M3 11 21 3l-8 18-2-8-8-2z"/></svg>
+            </button>
+          </div>
+          <div class="map-status" id="mapStatus" role="status"></div>
+        </div>
+      </div>
+      <p class="source">Datos de calles y accesibilidad: © colaboradores de OpenStreetMap. Rutas calculadas con Valhalla (FOSSGIS). Comprueba siempre las indicaciones sobre el terreno.</p>
+    </div>
+  </section>
+
+  <!-- ============ PREMIUM ============ -->
+  <section id="premium">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Ruta Real Premium</p>
+        <h2>Más allá del trayecto diario</h2>
+        <p class="lead">La app es gratuita para que nadie se quede fuera. Con Premium desbloqueas rutas exclusivas de ocio y turismo, también por la montaña, y más funciones de Rachel.</p>
+      </div>
+      <div class="premium-grid">
+        <div class="plan">
+          <h3>Premium</h3>
+          <p class="price">4,99 € <small>/ mes</small></p>
+          <ul>
+            <li>Rutas exclusivas turísticas y recreativas: Sevilla monumental, Triana, parques y Sierra Norte.</li>
+            <li>Atajos rápidos para ir al trabajo que no aparecen en otros navegadores.</li>
+            <li>Alertas en tiempo real de ascensores, obras y cortes en tus rutas guardadas.</li>
+            <li>Rachel Plus: rutas narradas con la historia de cada lugar.</li>
+            <li>Atención prioritaria por chat y botón de ayuda en ruta.</li>
+            <li>Sin anuncios.</li>
+          </ul>
+          <button class="btn" type="button" id="buyPremium">Hazte Premium por 4,99 €</button>
+          <p class="state" id="premiumState">Paga con PayPal, tarjeta, transferencia o Bizum. Cancela cuando quieras. (Prototipo: pago simulado.)</p>
+        </div>
+        <div class="table-scroll">
+          <table class="compare">
+            <thead><tr><th>Función</th><th>Gratis</th><th>Premium</th></tr></thead>
+            <tbody>
+              <tr><td>Rutas accesibles por Sevilla</td><td class="y">✓</td><td class="y">✓</td></tr>
+              <tr><td>Perfiles de movilidad</td><td class="y">✓</td><td class="y">✓</td></tr>
+              <tr><td>Asistente Rachel</td><td class="y">✓</td><td class="y">✓</td></tr>
+              <tr><td>Reportar obstáculos</td><td class="y">✓</td><td class="y">✓</td></tr>
+              <tr><td>Rutas turísticas exclusivas</td><td class="n">—</td><td class="y">✓</td></tr>
+              <tr><td>Rutas de montaña adaptadas</td><td class="n">—</td><td class="y">✓</td></tr>
+              <tr><td>Alertas en tiempo real</td><td class="n">—</td><td class="y">✓</td></tr>
+              <tr><td>Rutas narradas por Rachel</td><td class="n">—</td><td class="y">✓</td></tr>
+              <tr><td>Sin anuncios</td><td class="n">—</td><td class="y">✓</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="social">
+        <div class="ig-icon" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </div>
+        <div>
+          <h3>Síguenos en Instagram</h3>
+          <p class="muted">Novedades, rutas nuevas y la comunidad de Ruta Real en <strong>@somosrutareal</strong>.</p>
+        </div>
+        <a class="btn red" href="https://www.instagram.com/somosrutareal?dmpr=MWZ5NWp1ZWpvdjFoaw==" target="_blank" rel="noopener">Ir a @somosrutareal</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUEJAS ============ -->
+  <section id="quejas" class="map-section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Quejas y sugerencias</p>
+        <h2>Tu opinión mejora cada ruta</h2>
+      </div>
+      <div class="feedback-grid">
+        <div>
+          <p class="lead">¿Una calle que no estaba bien marcada, un ascensor que no funcionaba o una idea para la app? Cuéntanoslo. Cada aviso nos ayuda a que la siguiente persona no se encuentre la misma barrera.</p>
+          <div class="sent-list" id="sentList"></div>
+        </div>
+        <form class="form" id="feedbackForm" novalidate>
+          <div class="seg" role="radiogroup" aria-label="Tipo de mensaje">
+            <input type="radio" name="kind" id="k-sug" value="sugerencia" checked><label for="k-sug">Sugerencia</label>
+            <input type="radio" name="kind" id="k-que" value="queja"><label for="k-que">Queja</label>
+            <input type="radio" name="kind" id="k-inc" value="incidencia"><label for="k-inc">Barrera en la calle</label>
+          </div>
+          <div class="two">
+            <div class="field"><label for="fbName">Nombre (opcional)</label><input type="text" id="fbName" autocomplete="name"></div>
+            <div class="field"><label for="fbEmail">Email (opcional)</label><input type="email" id="fbEmail" autocomplete="email" placeholder="Para poder responderte"></div>
+          </div>
+          <div class="field"><label for="fbPlace">Lugar (opcional)</label><input type="text" id="fbPlace" placeholder="Ej. Calle Sierpes, esquina con Plaza San Francisco"></div>
+          <div class="field"><label for="fbMsg">Tu mensaje</label><textarea id="fbMsg" required placeholder="Cuéntanos qué ha pasado o qué te gustaría ver en Ruta Real"></textarea></div>
+          <button class="btn red" type="submit">Enviar</button>
+          <div id="fbNotice" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <span><strong>Ruta Real</strong> · Grupo 3 Innovadores · Sevilla</span>
+      <span><a href="https://www.instagram.com/somosrutareal?dmpr=MWZ5NWp1ZWpvdjFoaw==" target="_blank" rel="noopener">Instagram @somosrutareal</a> · Emergencias: 112</span>
+    </div>
+  </footer>
+</main>
+
+<!-- ============ RACHEL ============ -->
+<aside class="rachel" id="rachel" aria-label="Chat con Rachel">
+  <div class="rachel-head">
+    <img src="../assets/rachel-face.png" alt="" width="48" height="48">
+    <div>
+      <h2>Rachel</h2>
+      <p>Asistente de IA de Ruta Real</p>
+    </div>
+    <button class="close" type="button" id="rachelClose" aria-label="Cerrar chat">×</button>
+  </div>
+  <div class="chat" id="chat" aria-live="polite"></div>
+  <div class="quick" id="quick"></div>
+  <form class="composer" id="composer" autocomplete="off">
+    <label for="ask" class="skip">Escribe a Rachel</label>
+    <input type="text" id="ask" placeholder="Pregúntale algo a Rachel…">
+    <button type="submit" aria-label="Enviar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+    </button>
+  </form>
+</aside>
+</div>
+
+<button class="rachel-fab" id="rachelFab" type="button" data-open-rachel>
+  <img src="../assets/rachel-face.png" alt="" width="44" height="44"> Pregunta a Rachel
+</button>
+
+<div class="modal" id="payModal" hidden role="dialog" aria-modal="true" aria-labelledby="payTitle">
+  <div class="modal-card">
+    <h3 id="payTitle">Ruta Real Premium · 4,99 €/mes</h3>
+    <p class="muted">Elige cómo quieres pagar.</p>
+    <div class="pay-opts">
+      <label><input type="radio" name="pay" value="paypal" checked><span>PayPal</span></label>
+      <label><input type="radio" name="pay" value="card"><span>Tarjeta bancaria</span></label>
+      <label><input type="radio" name="pay" value="bizum"><span>Bizum</span></label>
+      <label><input type="radio" name="pay" value="transfer"><span>Transferencia bancaria</span></label>
+    </div>
+    <p class="notice" id="payNote"></p>
+    <div class="modal-actions">
+      <button class="btn ghost small" type="button" id="payCancel">Cancelar</button>
+      <button class="btn small" type="button" id="payGo">Continuar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="../config.js"></script>
+<script src="../app.js"></script>
+<script src="../rachel.js"></script>
+</body>
+</html>
