@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="../assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Outfit:wght@500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="vivid.css">
@@ -119,6 +119,7 @@
         <p class="lead">Mueve el mapa, acerca con los dedos y toca cualquier lugar. Busca cualquier sitio de la ciudad, elige cómo te mueves y te trazamos la ruta evitando escaleras cuando lo necesites. También puedes ver estaciones de metro, aseos adaptados y reportar obstáculos.</p>
       </div>
 
+    </div>
       <div class="map-shell">
         <form class="planner" id="planner" autocomplete="off">
           <div class="field">
@@ -187,6 +188,7 @@
           <div class="map-status" id="mapStatus" role="status"></div>
         </div>
       </div>
+    <div class="wrap">
       <p class="source">Datos de calles y accesibilidad: © colaboradores de OpenStreetMap. Rutas calculadas con Valhalla (FOSSGIS). Comprueba siempre las indicaciones sobre el terreno.</p>
     </div>
   </section>
@@ -332,5 +334,6 @@
 <script src="../config.js"></script>
 <script src="../app.js"></script>
 <script src="../rachel.js"></script>
+<script>document.body.classList.add("rachel-closed");</script>
 </body>
 </html>

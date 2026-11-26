@@ -143,3 +143,135 @@
 .vivid .rachel-fab { background: linear-gradient(120deg, var(--red), #ff7a1a); }
 
 @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+
+/* =====================================================================
+   FORMA PROPIA DE LA WEB: bordes gruesos, sombras duras, cabecera en
+   cápsula flotante, Rachel como chat flotante y mapa de borde a borde.
+   ===================================================================== */
+.vivid { --f-display: "Bricolage Grotesque", "Outfit", system-ui, sans-serif; --edge: 3px solid var(--ink); --hard: 6px 6px 0 var(--ink); }
+.vivid main { overflow-x: clip; }
+.vivid h1, .vivid h2 { letter-spacing: -0.03em; }
+
+/* Cabecera en cápsula flotante */
+.vivid .site-header { top: 10px; margin: 10px max(12px, env(safe-area-inset-right, 0px)) 0 max(12px, env(safe-area-inset-left, 0px)); border: var(--edge); border-radius: 999px; box-shadow: 4px 4px 0 var(--ink); background: var(--surface); }
+.vivid .header-inner { padding-left: 10px; padding-right: 10px; }
+.vivid .nav a { border-radius: 999px; }
+.vivid .nav a:hover { background: var(--albero); color: #1b1300; }
+@media (max-width: 900px) {
+  .vivid .nav { top: calc(var(--header-h) + 6px); border: var(--edge); border-radius: 22px; box-shadow: var(--hard); }
+}
+
+/* Sin columna lateral: todo el ancho para el contenido */
+.vivid .layout, body.vivid.rachel-closed .layout { display: block; }
+.vivid .wrap { max-width: 1200px; }
+
+/* Portada: imagen a la izquierda, texto a la derecha, corte en diagonal */
+.vivid .hero { margin-top: calc(-1 * var(--header-h) - 10px); padding-top: calc(var(--header-h) + clamp(56px, 7vw, 100px)); padding-bottom: clamp(90px, 10vw, 140px); clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%); }
+.vivid .hero-grid { grid-template-columns: .85fr 1.15fr; }
+.vivid .rachel-figure { order: -1; width: min(380px, 100%); }
+.vivid .rachel-arch { border-radius: 50%; aspect-ratio: 1; border: 4px solid var(--ink); box-shadow: 0 0 0 10px var(--albero), 0 0 0 14px var(--ink), 14px 14px 0 14px var(--red); }
+.vivid .rachel-arch img { object-position: center 4%; }
+.vivid .rachel-figure::before { content: ""; position: absolute; inset: -34px; border-radius: 50%; border: 3px dashed rgb(255 255 255 / .55); animation: spin 40s linear infinite; pointer-events: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.vivid .rachel-tag { left: auto; right: -8%; bottom: -4%; transform: rotate(4deg); border: var(--edge); border-radius: 14px; box-shadow: var(--hard); background: var(--albero); }
+.vivid .rachel-tag b { color: var(--ink); }
+.vivid .hero .btn { border: var(--edge); }
+
+/* Cinta ladeada que cruza la página */
+.vivid .ticker { position: relative; z-index: 2; transform: rotate(-2deg); margin: -60px -20px 0; border: var(--edge); border-left: 0; border-right: 0; box-shadow: 0 6px 0 var(--ink); }
+
+/* Botones y campos con borde */
+.vivid .btn { border: var(--edge); box-shadow: 4px 4px 0 var(--ink); border-radius: 12px; }
+.vivid .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+.vivid .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+.vivid .btn.red { box-shadow: 4px 4px 0 var(--ink); }
+.vivid .btn.ghost { border: var(--edge); box-shadow: 4px 4px 0 var(--ink); }
+.vivid .hero .btn { box-shadow: 4px 4px 0 var(--ink); }
+.vivid .hero .btn.ghost { border-color: #fff; box-shadow: 4px 4px 0 rgb(0 0 0 / .4); }
+.vivid input[type="text"], .vivid input[type="email"], .vivid textarea, .vivid select { border: 2px solid var(--ink); border-radius: 8px; background: var(--surface); }
+.vivid .icon-btn { border: 2px solid var(--ink); border-radius: 8px; background: var(--albero); color: #1b1300; }
+.vivid .profiles label, .vivid .seg label { border: 2px solid var(--ink); border-radius: 8px; }
+.vivid .chip { border: 2px solid var(--ink); border-radius: 8px; }
+
+/* Quiénes somos: tarjetas tipo pegatina */
+.vivid .section-head { text-align: center; justify-items: center; }
+.vivid .section-head .lead { margin-inline: auto; }
+.vivid .var { border: var(--edge); border-top-width: 10px; border-radius: 6px; box-shadow: var(--hard); transition: transform .15s; }
+.vivid .var:nth-child(odd) { transform: rotate(-1deg); }
+.vivid .var:nth-child(even) { transform: rotate(1deg); }
+.vivid .var:hover { transform: rotate(0) translateY(-4px); }
+.vivid .promise { border: var(--edge); border-radius: 6px; box-shadow: 8px 8px 0 var(--ink); transform: rotate(-1deg); }
+.vivid .stats { background: none; padding: 0; gap: 16px; }
+.vivid .stat { border: var(--edge); border-radius: 50%; aspect-ratio: 1; display: grid; place-content: center; text-align: center; padding: 14px; box-shadow: var(--hard); background: var(--blue); }
+.vivid .stat:nth-child(2) { background: var(--red); }
+.vivid .stat:nth-child(3) { background: var(--turq); }
+.vivid .stat:nth-child(4) { background: var(--albero); }
+.vivid .stat strong { color: #fff; font-size: clamp(1.8rem, 3vw, 2.6rem); }
+.vivid .stat span { color: #fff; font-size: .85rem; }
+.vivid .stat:nth-child(4) strong, .vivid .stat:nth-child(4) span { color: #1b1300; }
+.vivid .stat:nth-child(3) strong, .vivid .stat:nth-child(3) span { color: #00211e; }
+.vivid .source { text-align: center; }
+.vivid .team { justify-content: center; }
+.vivid .team span { border: 2px solid var(--ink); }
+
+/* Mapa de borde a borde, buscador flotante a la derecha */
+.vivid .map-section { container: mapbox / inline-size; }
+.vivid .map-shell { border-radius: 0; border: 0; border-block: var(--edge); box-shadow: none; }
+@container mapbox (min-width: 860px) {
+  .vivid .map-shell { height: min(86vh, 820px); border-radius: 0; }
+  .vivid .planner { left: auto; right: max(16px, env(safe-area-inset-right, 0px)); top: 18px; bottom: 18px; width: 360px; border: var(--edge); border-radius: 10px; box-shadow: 8px 8px 0 var(--ink); background: var(--surface); backdrop-filter: none; }
+  .vivid .map-wrap .leaflet-top.leaflet-left { left: max(4px, env(safe-area-inset-left, 0px)); }
+  .vivid .map-tools { right: auto; left: 64px; top: 14px; display: flex; flex-wrap: wrap; max-width: calc(100% - 520px); }
+  .vivid .map-fab { right: auto; left: max(14px, env(safe-area-inset-left, 0px)); bottom: 34px; }
+  .vivid .map-status { left: 84px; bottom: 34px; max-width: calc(100% - 520px); }
+}
+.vivid .map-tools button { border: 2px solid var(--ink); border-radius: 999px; box-shadow: 3px 3px 0 var(--ink); }
+.vivid .map-fab { border: var(--edge); border-radius: 12px; box-shadow: 4px 4px 0 var(--ink); }
+.vivid .map-fab button + button { border-top: 2px solid var(--ink); }
+.vivid .result { border: 2px solid var(--ink); border-radius: 8px; background: var(--turq-soft); }
+.vivid .leaflet-bar { border: 2px solid var(--ink) !important; box-shadow: 3px 3px 0 var(--ink); }
+
+/* Premium: tarjeta de entrada con línea troquelada */
+.vivid .plan { border: var(--edge); border-radius: 12px; box-shadow: 10px 10px 0 var(--ink); }
+.vivid .plan .btn { border: var(--edge); }
+.vivid .plan .state { border-top: 3px dashed rgb(255 255 255 / .7); padding-top: 14px; }
+.vivid .compare { border: var(--edge); border-radius: 10px; box-shadow: 8px 8px 0 var(--albero); }
+.vivid .compare th { border-bottom: var(--edge); }
+.vivid .social { border: var(--edge); border-radius: 12px; box-shadow: 8px 8px 0 var(--albero); }
+.vivid .social .ig-icon { border: var(--edge); }
+
+/* Quejas: formulario como una postal con sello */
+.vivid .form { position: relative; border: var(--edge); border-radius: 4px; box-shadow: 10px 10px 0 var(--ink);
+  background: repeating-linear-gradient(180deg, transparent 0 31px, color-mix(in srgb, var(--blue) 10%, transparent) 31px 32px), var(--surface); padding-top: 54px; }
+.vivid .form::before { content: "RUTA REAL · SEVILLA"; position: absolute; top: 14px; right: 14px; padding: 8px 10px; border: 2px dashed var(--red); color: var(--red); font: 800 .7rem/1 var(--f-display); letter-spacing: .1em; transform: rotate(4deg); background: var(--red-soft); }
+.vivid .sent { border: 2px solid var(--ink); border-radius: 6px; box-shadow: 4px 4px 0 var(--ink); }
+
+/* Rachel: chat flotante en la esquina */
+.vivid .rachel { position: fixed; top: auto; left: auto; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); width: min(380px, calc(100vw - 32px)); height: min(600px, calc(100dvh - 120px)); z-index: 80;
+  border: var(--edge); border-radius: 18px; box-shadow: 8px 8px 0 var(--ink); overflow: hidden; animation: pop .2s ease-out; }
+@keyframes pop { from { transform: translateY(16px) scale(.97); opacity: 0; } }
+.vivid .rachel-head { border-bottom: var(--edge); }
+.vivid .msg { border-radius: 14px; }
+.vivid .msg.bot { border: 2px solid var(--ink); }
+.vivid .composer { border-top: var(--edge); }
+.vivid .composer button { border: 2px solid var(--ink); }
+.vivid .rachel-fab { border: var(--edge); box-shadow: 5px 5px 0 var(--ink); padding-right: 20px; }
+.vivid .rachel-fab::after { content: ""; position: absolute; top: 4px; left: 42px; width: 14px; height: 14px; border-radius: 50%; background: #2ee87a; border: 2px solid #fff; animation: ping 1.6s ease-out infinite; }
+@keyframes ping { 50% { transform: scale(1.3); } }
+
+/* Pie con ola */
+.vivid footer { border-top: var(--edge); }
+
+@media (max-width: 900px) {
+  .vivid .hero-grid { grid-template-columns: 1fr; }
+  .vivid .rachel-figure { width: min(240px, 66%); margin-top: 24px; }
+  .vivid .rachel-tag { right: -14%; bottom: -16%; }
+  .vivid .rachel-figure { margin-bottom: 48px; }
+  .vivid .stats { grid-template-columns: 1fr 1fr; }
+  .vivid .map-shell { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .vivid .rachel { width: auto; left: 10px; right: 10px; bottom: 10px; height: min(78dvh, 620px); }
+  .vivid .stat span { font-size: .75rem; }
+}
+@media (prefers-reduced-motion: reduce) { .vivid .rachel-figure::before, .vivid .rachel-fab::after { animation: none; } }
